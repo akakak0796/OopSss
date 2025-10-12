@@ -6,9 +6,10 @@ import dynamic from 'next/dynamic'
 interface GameProps {
   onGameEnd: (survivalTime: number, score: number) => void
   onSurvivalTimeUpdate: (time: number) => void
+  onStopGame?: () => void
 }
 
-export default function Game({ onGameEnd, onSurvivalTimeUpdate }: GameProps) {
+export default function Game({ onGameEnd, onSurvivalTimeUpdate, onStopGame }: GameProps) {
   const gameRef = useRef<HTMLDivElement>(null)
   const phaserGameRef = useRef<any>(null)
   const [gameStarted, setGameStarted] = useState(false)
@@ -1014,8 +1015,30 @@ export default function Game({ onGameEnd, onSurvivalTimeUpdate }: GameProps) {
   }, [])
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen relative">
       <div ref={gameRef} className="w-full h-full" />
+      
+      {/* Stop Game Button */}
+      {gameStarted && (
+        <div className="absolute top-4 right-4 z-10">
+          <button
+            onClick={() => {
+              if (phaserGameRef.current && phaserGameRef.current.scene) {
+                const scene = phaserGameRef.current.scene.scenes[0]
+                if (scene && scene.survivalTime !== undefined) {
+                  // End game with current score
+                  onGameEnd(scene.survivalTime, Math.floor(scene.survivalTime / 1000))
+                }
+              }
+            }}
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center space-x-2"
+          >
+            <span>⏹️</span>
+            <span>Stop Game</span>
+          </button>
+        </div>
+      )}
+      
       {!gameStarted && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="text-white text-center">
