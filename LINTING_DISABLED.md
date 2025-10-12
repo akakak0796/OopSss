@@ -2,7 +2,7 @@
 
 ## 🚫 **Linting Checks Turned Off**
 
-All linting checks have been successfully disabled for the SlitherFi project.
+All linting checks have been successfully disabled for the OopSss project.
 
 ### 📁 **Files Modified**
 

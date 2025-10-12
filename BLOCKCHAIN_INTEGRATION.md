@@ -1,8 +1,8 @@
-# SlitherFi Blockchain Integration
+# OopSss Blockchain Integration
 
 ## 🚀 **Full Blockchain Integration Complete!**
 
-SlitherFi now has complete blockchain integration with the SnakeToken contract deployed at `0x5B60CF7edCCc82350C223eF591a4C951d64e74EF` on U2U Mainnet.
+OopSss now has complete blockchain integration with the SnakeToken contract deployed at `0x5B60CF7edCCc82350C223eF591a4C951d64e74EF` on U2U Mainnet.
 
 ## 📋 **Features Implemented**
 
@@ -49,7 +49,7 @@ export const CONTRACT_CONFIG = {
 - `decimals()` - Get token decimals
 
 ### **Hook Integration**
-The `useSlitherToken` hook now provides:
+The `useOopSssToken` hook now provides:
 - Real-time balance reading from contract
 - Transaction writing for entry fees and rewards
 - Transaction confirmation handling
@@ -88,7 +88,7 @@ The `useSlitherToken` hook now provides:
 - `src/config/contract.ts` - Contract configuration
 
 ### **Modified Files**
-- `src/hooks/useSlitherToken.ts` - Real contract integration
+- `src/hooks/useOopSssToken.ts` - Real contract integration
 - `src/app/page.tsx` - Updated entry fee display
 - `src/app/page-simple.tsx` - Updated entry fee display
 
@@ -162,4 +162,4 @@ If you encounter any issues with the blockchain integration:
 
 ---
 
-**SlitherFi is now fully integrated with the blockchain! 🎉**
+**OopSss is now fully integrated with the blockchain! 🎉**

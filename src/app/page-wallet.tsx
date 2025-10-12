@@ -5,7 +5,7 @@ import { useAccount, useBalance } from 'wagmi'
 import { useState, useEffect } from 'react'
 import { Play, Trophy, Coins, Zap, Users, Target, BarChart3 } from 'lucide-react'
 import dynamic from 'next/dynamic'
-import { useSlitherToken } from '@/hooks/useSlitherToken'
+import { useOopSssToken } from '@/hooks/useOopSssToken'
 import Link from 'next/link'
 
 // Dynamic import of MultiplayerGame component to avoid SSR issues
@@ -30,7 +30,7 @@ export default function Home() {
     playerStats, 
     claimDailyReward, 
     isClaimingDaily 
-  } = useSlitherToken()
+  } = useOopSssToken()
 
   useEffect(() => {
     setIsClient(true)
@@ -48,7 +48,7 @@ export default function Home() {
           <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-lg">🐍</span>
           </div>
-          <h1 className="text-2xl font-bold text-white">SlitherFi</h1>
+          <h1 className="text-2xl font-bold text-white">OopSss</h1>
         </div>
         <div className="flex items-center space-x-4">
           {isClient && isConnected && (
@@ -68,7 +68,7 @@ export default function Home() {
       <div className="container mx-auto px-6 py-20">
         <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-white mb-6">
-            SlitherFi
+            OopSss
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             The first SocialFi-GameFi snake game on U2U Mainnet. Play to earn $ST tokens, 

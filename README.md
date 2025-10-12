@@ -1,20 +1,35 @@
 # OopSss - SocialFi GameFi Snake Game
 
-A browser-based, OopSss.io-inspired multiplayer snake game integrated with blockchain for SocialFi (decentralized social features) and GameFi (play-to-earn) mechanics on U2U Mainnet.
+A browser-based, OopSss.io-inspired multiplayer snake game integrated with blockchain for SocialFi (decentralized social features) and GameFi (play-to-earn) mechanics on U2U Solaris Mainnet.
+
+## 🔗 **Live Links & Contract**
+
+### **🌐 Live Application**
+- **Play Now**: [https://oopsss.vercel.app](https://oopsss.vercel.app)
+- **Network**: U2U Solaris Mainnet (Chain ID: 39)
+- **Status**: ✅ Live and Playable
+
+### **📄 Smart Contract**
+- **Contract Address**: `0x5B60CF7edCCc82350C223eF591a4C951d64e74EF`
+- **Token Symbol**: $ST (OopSss Token)
+- **Network**: U2U Solaris Mainnet
+- **Explorer**: [View on U2U Explorer](https://u2uscan.xyz/address/0x5B60CF7edCCc82350C223eF591a4C951d64e74EF)
+- **ABI**: Available in `src/contracts/SnakeToken.json`
 
 ## 🎮 Features
 
 ### Gameplay Mechanics
-- **Snake Control**: Mouse steering (PC) or finger swipes (mobile)
-- **Speed Boost**: Arrow keys for speed boost (costs $ST)
-- **Objective**: Survive as long as possible in multiplayer arena
-- **Rewards**: Earn 1 $ST per 10 seconds survived
-- **Entry Fee**: Pay 5 $ST per match
+- **Snake Control**: Mouse steering (PC) or arrow keys (keyboard)
+- **AI Opponents**: 6 computer-controlled snakes to compete against
+- **Objective**: Collect food to grow and avoid AI snakes
+- **Rewards**: Earn 1 $ST per food item collected
+- **Entry Fee**: Pay 1 $ST per match
+- **Game Over**: Touching AI snake ends game immediately
 
 ### Blockchain Integration ($ST Token)
-- **Custom ERC-20 Token**: $ST (OopSss Token) on U2U Mainnet
-- **Entry Fees**: 5 $ST per match
-- **Survival Rewards**: 1 $ST per 10 seconds survived
+- **Custom ERC-20 Token**: $ST (OopSss Token) on U2U Solaris Mainnet
+- **Entry Fees**: 1 $ST per match
+- **Food Rewards**: 1 $ST per food item collected
 - **Daily Login**: 2 $ST base reward + streak bonuses
 - **Leaderboard Rewards**: Bonus $ST for top performers
 
@@ -73,9 +88,9 @@ A browser-based, OopSss.io-inspired multiplayer snake game integrated with block
   - Tap: Speed boost
 
 ### Game Flow
-1. **Connect Wallet**: Connect your U2U Mainnet wallet
+1. **Connect Wallet**: Connect your U2U Solaris Mainnet wallet
 2. **Claim Daily Reward**: Get 2 $ST daily login bonus
-3. **Enter Match**: Pay 5 $ST entry fee
+3. **Enter Match**: Pay 1 $ST entry fee
 4. **Play**: Survive as long as possible
 5. **Earn**: Receive $ST based on survival time
 6. **Compete**: Climb the leaderboards
@@ -90,7 +105,7 @@ A browser-based, OopSss.io-inspired multiplayer snake game integrated with block
 - **State Management**: React hooks
 
 ### Blockchain
-- **Network**: U2U Mainnet
+- **Network**: U2U Solaris Mainnet
 - **Token Standard**: ERC-20
 - **Smart Contracts**: 
   - `OopSssToken.sol`: Token management and rewards
@@ -173,7 +188,7 @@ oopsss/
    - Self-hosted
 
 ### Smart Contract Deployment
-1. Deploy to U2U Mainnet using Hardhat or Remix
+1. Deploy to U2U Solaris Mainnet using Hardhat or Remix
 2. Update contract addresses in `src/hooks/useOopSssToken.ts`
 3. Verify contracts on U2U Explorer
 

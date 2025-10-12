@@ -2,7 +2,7 @@
 
 ## ✅ **U2U Solaris Mainnet Configuration Updated**
 
-SlitherFi is now fully configured to use **U2U Solaris Mainnet** with the correct network details!
+OopSss is now fully configured to use **U2U Solaris Mainnet** with the correct network details!
 
 ### 🌐 **Network Configuration**
 
@@ -145,7 +145,7 @@ The application now supports:
 
 ---
 
-**SlitherFi is now fully integrated with U2U Solaris Mainnet and includes stop game functionality! 🎉**
+**OopSss is now fully integrated with U2U Solaris Mainnet and includes stop game functionality! 🎉**
 
 Players can now:
 - Connect to U2U Solaris Mainnet (Chain ID: 39)

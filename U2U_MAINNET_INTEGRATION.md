@@ -2,7 +2,7 @@
 
 ## ✅ **Network Configuration Updated**
 
-SlitherFi is now fully configured to use **U2U Mainnet** as the default network!
+OopSss is now fully configured to use **U2U Mainnet** as the default network!
 
 ### 🎯 **Key Features Implemented**
 
@@ -53,7 +53,7 @@ export const NETWORK_CONFIG = {
 ```typescript
 // src/app/providers.tsx
 const config = getDefaultConfig({
-  appName: 'SlitherFi',
+  appName: 'OopSss',
   chains: [u2uMainnet, mainnet, polygon, arbitrum, optimism, base, sepolia],
   transports: {
     [u2uMainnet.id]: http('https://rpc-mainnet.uniultra.xyz', {
@@ -138,7 +138,7 @@ The application is now fully configured for U2U Mainnet:
 
 ---
 
-**SlitherFi is now fully integrated with U2U Mainnet! 🎉**
+**OopSss is now fully integrated with U2U Mainnet! 🎉**
 
 Players can now:
 - Connect to U2U Mainnet automatically

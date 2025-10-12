@@ -1,6 +1,6 @@
-# SlitherFi Multiplayer Implementation
+# OopSss Multiplayer Implementation
 
-This document describes the comprehensive multiplayer Slither.io-style game implementation with Socket.IO integration.
+This document describes the comprehensive multiplayer OopSss.io-style game implementation with Socket.IO integration.
 
 ## Features Implemented
 
@@ -64,7 +64,7 @@ This document describes the comprehensive multiplayer Slither.io-style game impl
 ## File Structure
 
 ```
-slitherfi/
+oopsss/
 ├── server.js                 # Socket.IO server with game logic
 ├── src/
 │   └── components/
@@ -138,7 +138,7 @@ const colors = [
 
 1. **Install Dependencies**:
    ```bash
-   cd slitherfi
+   cd oopsss
    npm install
    ```
 
