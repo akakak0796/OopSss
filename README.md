@@ -1,36 +1,231 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SlitherFi - SocialFi GameFi Snake Game
 
-## Getting Started
+A browser-based, Slither.io-inspired multiplayer snake game integrated with blockchain for SocialFi (decentralized social features) and GameFi (play-to-earn) mechanics on U2U Mainnet.
 
-First, run the development server:
+## 🎮 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Gameplay Mechanics
+- **Snake Control**: Mouse steering (PC) or finger swipes (mobile)
+- **Speed Boost**: Arrow keys for speed boost (costs $ST)
+- **Objective**: Survive as long as possible in multiplayer arena
+- **Rewards**: Earn 1 $ST per 10 seconds survived
+- **Entry Fee**: Pay 5 $ST per match
+
+### Blockchain Integration ($ST Token)
+- **Custom ERC-20 Token**: $ST (Slither Token) on U2U Mainnet
+- **Entry Fees**: 5 $ST per match
+- **Survival Rewards**: 1 $ST per 10 seconds survived
+- **Daily Login**: 2 $ST base reward + streak bonuses
+- **Leaderboard Rewards**: Bonus $ST for top performers
+
+### SocialFi Elements
+- **Wallet-based Profiles**: Customizable snake skins
+- **Daily Login Rewards**: Encouraging retention with streak bonuses
+- **Leaderboards**: Daily/weekly rankings with bonus rewards
+- **Community Challenges**: Collective goals for bonus $ST pools
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ or Bun
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd slitherfi
+   ```
+
+2. **Install dependencies**
+   ```bash
+   bun install
+   # or
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file:
+   ```env
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your-walletconnect-project-id
+   ```
+
+4. **Run the development server**
+   ```bash
+   bun run dev
+   # or
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🎯 How to Play
+
+### Controls
+- **PC**: 
+  - Mouse: Steer snake (follows cursor)
+  - Arrow Keys: Speed boost (costs $ST)
+  - Space: Temporary speed boost
+- **Mobile**: 
+  - Finger swipes: Direction control
+  - Tap: Speed boost
+
+### Game Flow
+1. **Connect Wallet**: Connect your U2U Mainnet wallet
+2. **Claim Daily Reward**: Get 2 $ST daily login bonus
+3. **Enter Match**: Pay 5 $ST entry fee
+4. **Play**: Survive as long as possible
+5. **Earn**: Receive $ST based on survival time
+6. **Compete**: Climb the leaderboards
+
+## 🏗️ Technical Architecture
+
+### Frontend
+- **Framework**: Next.js 14 with TypeScript
+- **Game Engine**: Phaser.js 3.90.0
+- **Styling**: Tailwind CSS
+- **Wallet Integration**: RainbowKit + Wagmi
+- **State Management**: React hooks
+
+### Blockchain
+- **Network**: U2U Mainnet
+- **Token Standard**: ERC-20
+- **Smart Contracts**: 
+  - `SlitherToken.sol`: Token management and rewards
+  - `SlitherGame.sol`: Game logic and leaderboards
+- **Integration**: Web3.js + Viem
+
+### Smart Contracts
+
+#### SlitherToken.sol
+- ERC-20 token with game-specific features
+- Daily login rewards with streak bonuses
+- Entry fee management
+- Survival reward distribution
+
+#### SlitherGame.sol
+- Game session management
+- Leaderboard tracking
+- Player statistics
+- Reward calculations
+
+## 🎨 Game Assets
+
+The game uses simple colored rectangles for MVP:
+- **Player Snake**: Green rectangle
+- **Bot Snakes**: Red rectangles
+- **Orbs**: Yellow rectangles
+- **Background**: Black canvas
+
+*Note: In production, these would be replaced with proper game sprites and animations.*
+
+## 📱 Mobile Support
+
+- **Responsive Design**: Works on all screen sizes
+- **Touch Controls**: Finger swipe navigation
+- **Mobile Wallet**: MetaMask mobile app support
+- **Performance**: Optimized for mobile devices
+
+## 🔧 Development
+
+### Project Structure
+```
+slitherfi/
+├── src/
+│   ├── app/                 # Next.js app router
+│   │   ├── page.tsx        # Landing page
+│   │   ├── leaderboard/    # Leaderboard page
+│   │   └── layout.tsx      # Root layout
+│   ├── components/         # React components
+│   │   ├── Game.tsx        # Phaser game component
+│   │   └── Leaderboard.tsx # Leaderboard component
+│   ├── hooks/              # Custom hooks
+│   │   └── useSlitherToken.ts # Blockchain integration
+│   └── app/
+│       ├── providers.tsx   # Wallet providers
+│       └── globals.css     # Global styles
+├── contracts/              # Smart contracts
+│   ├── SlitherToken.sol   # Token contract
+│   └── SlitherGame.sol    # Game contract
+└── public/                # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Available Scripts
+- `bun run dev` - Start development server
+- `bun run build` - Build for production
+- `bun run start` - Start production server
+- `bun run lint` - Run ESLint
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Frontend Deployment
+1. Build the application:
+   ```bash
+   bun run build
+   ```
 
-## Learn More
+2. Deploy to your preferred platform:
+   - Vercel (recommended for Next.js)
+   - Netlify
+   - AWS Amplify
+   - Self-hosted
 
-To learn more about Next.js, take a look at the following resources:
+### Smart Contract Deployment
+1. Deploy to U2U Mainnet using Hardhat or Remix
+2. Update contract addresses in `src/hooks/useSlitherToken.ts`
+3. Verify contracts on U2U Explorer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 Roadmap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Phase 1 (MVP) ✅
+- [x] Basic snake game mechanics
+- [x] Wallet integration
+- [x] $ST token system
+- [x] Daily rewards
+- [x] Leaderboards
 
-## Deploy on Vercel
+### Phase 2 (Enhancement)
+- [ ] NFT snake skins
+- [ ] Multiplayer real-time gameplay
+- [ ] Tournament system
+- [ ] Advanced leaderboard rewards
+- [ ] Social features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Phase 3 (Advanced)
+- [ ] Cross-chain support
+- [ ] Governance token
+- [ ] Staking mechanisms
+- [ ] Mobile app
+- [ ] Advanced game modes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🆘 Support
+
+- **Documentation**: Check this README
+- **Issues**: Create a GitHub issue
+- **Discord**: Join our community server
+- **Twitter**: Follow for updates
+
+## 🙏 Acknowledgments
+
+- **Phaser.js**: Game engine
+- **RainbowKit**: Wallet integration
+- **U2U Network**: Blockchain infrastructure
+- **OpenZeppelin**: Smart contract libraries
+
+---
+
+**SlitherFi** - Where gaming meets blockchain! 🐍⚡
