@@ -1,7 +1,7 @@
 // Simple test script to verify the server is working
 const { io } = require('socket.io-client');
 
-console.log('Testing SlitherFi server connection...');
+console.log('Testing OopSss server connection...');
 
 const socket = io('http://localhost:3001');
 

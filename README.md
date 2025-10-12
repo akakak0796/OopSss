@@ -1,6 +1,6 @@
-# SlitherFi - SocialFi GameFi Snake Game
+# OopSss - SocialFi GameFi Snake Game
 
-A browser-based, Slither.io-inspired multiplayer snake game integrated with blockchain for SocialFi (decentralized social features) and GameFi (play-to-earn) mechanics on U2U Mainnet.
+A browser-based, OopSss.io-inspired multiplayer snake game integrated with blockchain for SocialFi (decentralized social features) and GameFi (play-to-earn) mechanics on U2U Mainnet.
 
 ## 🎮 Features
 
@@ -12,7 +12,7 @@ A browser-based, Slither.io-inspired multiplayer snake game integrated with bloc
 - **Entry Fee**: Pay 5 $ST per match
 
 ### Blockchain Integration ($ST Token)
-- **Custom ERC-20 Token**: $ST (Slither Token) on U2U Mainnet
+- **Custom ERC-20 Token**: $ST (OopSss Token) on U2U Mainnet
 - **Entry Fees**: 5 $ST per match
 - **Survival Rewards**: 1 $ST per 10 seconds survived
 - **Daily Login**: 2 $ST base reward + streak bonuses
@@ -35,7 +35,7 @@ A browser-based, Slither.io-inspired multiplayer snake game integrated with bloc
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd slitherfi
+   cd oopsss
    ```
 
 2. **Install dependencies**
@@ -93,19 +93,19 @@ A browser-based, Slither.io-inspired multiplayer snake game integrated with bloc
 - **Network**: U2U Mainnet
 - **Token Standard**: ERC-20
 - **Smart Contracts**: 
-  - `SlitherToken.sol`: Token management and rewards
-  - `SlitherGame.sol`: Game logic and leaderboards
+  - `OopSssToken.sol`: Token management and rewards
+  - `OopSssGame.sol`: Game logic and leaderboards
 - **Integration**: Web3.js + Viem
 
 ### Smart Contracts
 
-#### SlitherToken.sol
+#### OopSssToken.sol
 - ERC-20 token with game-specific features
 - Daily login rewards with streak bonuses
 - Entry fee management
 - Survival reward distribution
 
-#### SlitherGame.sol
+#### OopSssGame.sol
 - Game session management
 - Leaderboard tracking
 - Player statistics
@@ -132,7 +132,7 @@ The game uses simple colored rectangles for MVP:
 
 ### Project Structure
 ```
-slitherfi/
+oopsss/
 ├── src/
 │   ├── app/                 # Next.js app router
 │   │   ├── page.tsx        # Landing page
@@ -142,13 +142,13 @@ slitherfi/
 │   │   ├── Game.tsx        # Phaser game component
 │   │   └── Leaderboard.tsx # Leaderboard component
 │   ├── hooks/              # Custom hooks
-│   │   └── useSlitherToken.ts # Blockchain integration
+│   │   └── useOopSssToken.ts # Blockchain integration
 │   └── app/
 │       ├── providers.tsx   # Wallet providers
 │       └── globals.css     # Global styles
 ├── contracts/              # Smart contracts
-│   ├── SlitherToken.sol   # Token contract
-│   └── SlitherGame.sol    # Game contract
+│   ├── OopSssToken.sol   # Token contract
+│   └── OopSssGame.sol    # Game contract
 └── public/                # Static assets
 ```
 
@@ -174,7 +174,7 @@ slitherfi/
 
 ### Smart Contract Deployment
 1. Deploy to U2U Mainnet using Hardhat or Remix
-2. Update contract addresses in `src/hooks/useSlitherToken.ts`
+2. Update contract addresses in `src/hooks/useOopSssToken.ts`
 3. Verify contracts on U2U Explorer
 
 ## 🎯 Roadmap
@@ -228,4 +228,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**SlitherFi** - Where gaming meets blockchain! 🐍⚡
+**OopSss** - Where gaming meets blockchain! 🐍⚡

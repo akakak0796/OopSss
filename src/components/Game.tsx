@@ -50,7 +50,7 @@ export default function Game({ onGameEnd, onSurvivalTimeUpdate, onStopGame }: Ga
       function create(this: any) {
       const { width, height } = this.scale
       
-      // Create snake head (player) with Slither.io style
+      // Create snake head (player) with OopSss.io style
       const player = this.add.ellipse(width / 2, height / 2, 20, 15, 0xff0000)
       player.setStrokeStyle(2, 0xcc0000)
       this.physics.add.existing(player)
@@ -59,7 +59,7 @@ export default function Game({ onGameEnd, onSurvivalTimeUpdate, onStopGame }: Ga
       player.body.setDrag(100)
       const snakeBody: any[] = [player]
       
-      // Add large cartoon eyes like Slither.io
+      // Add large cartoon eyes like OopSss.io
       const leftEye = this.add.circle(player.x - 6, player.y - 4, 4, 0xffffff)
       const rightEye = this.add.circle(player.x + 6, player.y - 4, 4, 0xffffff)
       const leftPupil = this.add.circle(player.x - 6, player.y - 4, 2, 0x000000)
@@ -80,7 +80,7 @@ export default function Game({ onGameEnd, onSurvivalTimeUpdate, onStopGame }: Ga
         ease: 'Sine.easeInOut'
       })
       
-      // Create animated hexagonal grid background like Slither.io
+      // Create animated hexagonal grid background like OopSss.io
       const hexSize = 40
       const hexWidth = hexSize * Math.sqrt(3)
       const hexHeight = hexSize * 2
@@ -872,7 +872,7 @@ export default function Game({ onGameEnd, onSurvivalTimeUpdate, onStopGame }: Ga
         loop: true
       })
 
-      // Create UI elements like Slither.io
+      // Create UI elements like OopSss.io
       
       // Leaderboard (top right) - Fixed
       const leaderboardBg = this.add.graphics()

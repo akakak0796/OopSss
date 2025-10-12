@@ -1,4 +1,4 @@
-// Network configuration for SlitherFi
+// Network configuration for OopSss
 export const NETWORK_CONFIG = {
   U2U_MAINNET: {
     id: 39,

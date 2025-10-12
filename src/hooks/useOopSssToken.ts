@@ -19,7 +19,7 @@ interface LeaderboardEntry {
   timestamp: number
 }
 
-export function useSlitherToken() {
+export function useOopSssToken() {
   const { address, isConnected } = useAccount()
   const { writeContract, data: hash, isPending: isWriting } = useWriteContract()
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({

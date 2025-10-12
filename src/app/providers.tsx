@@ -11,7 +11,7 @@ import { NETWORK_CONFIG } from '@/config/network'
 const u2uMainnet = NETWORK_CONFIG.U2U_MAINNET
 
 const config = getDefaultConfig({
-  appName: 'SlitherFi',
+  appName: 'OopSss',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'demo-project-id',
   chains: [u2uMainnet, mainnet, polygon, arbitrum, optimism, base, sepolia],
   transports: {

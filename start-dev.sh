@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Starting SlitherFi Development Environment..."
+echo "Starting OopSss Development Environment..."
 echo ""
 echo "This will start both the game server and the Next.js client."
 echo "Make sure you have installed dependencies with: npm install"

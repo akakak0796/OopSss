@@ -1,6 +1,6 @@
 'use client'
 
-import { useSlitherToken } from '@/hooks/useSlitherToken'
+import { useOopSssToken } from '@/hooks/useOopSssToken'
 import Leaderboard from '@/components/Leaderboard'
 import { useAccount } from 'wagmi'
 import { ArrowLeft, RefreshCw } from 'lucide-react'
@@ -13,7 +13,7 @@ export default function LeaderboardPage() {
     weeklyLeaderboard, 
     refetchDailyLeaderboard, 
     refetchWeeklyLeaderboard 
-  } = useSlitherToken()
+  } = useOopSssToken()
 
   const handleRefresh = () => {
     refetchDailyLeaderboard()

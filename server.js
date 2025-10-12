@@ -7,7 +7,7 @@ const app = express();
 // Add basic endpoint for health check
 app.get('/', (req, res) => {
   res.json({ 
-    status: 'SlitherFi Server Running', 
+    status: 'OopSss Server Running', 
     timestamp: new Date().toISOString()
   });
 });
@@ -759,7 +759,7 @@ initializeAISnakes();
 
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
-  console.log(`SlitherFi server running on port ${PORT}`);
+  console.log(`OopSss server running on port ${PORT}`);
   console.log(`World size: ${WORLD_WIDTH}x${WORLD_HEIGHT}`);
   console.log(`AI snakes: ${AI_SNAKE_COUNT}`);
   console.log(`Max food: ${MAX_FOOD}`);

@@ -6,10 +6,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
 /**
- * @title SlitherToken ($ST)
- * @dev ERC-20 token for SlitherFi game rewards
+ * @title OopSssToken ($ST)
+ * @dev ERC-20 token for OopSss game rewards
  */
-contract SlitherToken is ERC20, Ownable, Pausable {
+contract OopSssToken is ERC20, Ownable, Pausable {
     uint256 public constant INITIAL_SUPPLY = 1000000 * 10**18; // 1M tokens
     uint256 public constant DAILY_REWARD = 2 * 10**18; // 2 $ST per day
     uint256 public constant ENTRY_FEE = 5 * 10**18; // 5 $ST entry fee
