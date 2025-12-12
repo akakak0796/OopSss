@@ -1,52 +1,40 @@
 // Network configuration for OopSss
 export const NETWORK_CONFIG = {
-  U2U_MAINNET: {
-    id: 39,
-    name: 'U2U Solaris Mainnet',
+  STORY_AENEID: {
+    id: 1315,
+    name: 'Story Aeneid Testnet',
     nativeCurrency: {
       decimals: 18,
-      name: 'U2U',
-      symbol: 'U2U',
+      name: 'IP',
+      symbol: 'IP',
     },
     rpcUrls: {
       default: {
-        http: ['https://rpc-mainnet.u2u.xyz'],
+        http: ['https://aeneid.storyrpc.io'],
       },
     },
     blockExplorers: {
       default: {
-        name: 'U2U Explorer',
-        url: 'https://u2uscan.xyz',
+        name: 'Story Explorer',
+        url: 'https://aeneid.storyscan.xyz',
       },
     },
   },
-  CONTRACT_ADDRESS: '0x5B60CF7edCCc82350C223eF591a4C951d64e74EF',
-  DEFAULT_CHAIN_ID: 39, // U2U Solaris Mainnet
+  CONTRACT_ADDRESS: '0x39Ab8225c635e888Ef2819791Cb38972ad0BB20F',
+  DEFAULT_CHAIN_ID: 1315, // Story Aeneid Testnet
 } as const
 
-// Helper function to check if connected to U2U Mainnet
-export const isU2UMainnet = (chainId?: number) => {
+// Helper function to check if connected to Story Aeneid
+export const isStoryAeneid = (chainId?: number) => {
   return chainId === NETWORK_CONFIG.DEFAULT_CHAIN_ID
 }
 
 // Helper function to get network name
 export const getNetworkName = (chainId?: number) => {
   switch (chainId) {
-    case 39:
-      return 'U2U Solaris Mainnet'
-    case 1:
-      return 'Ethereum Mainnet'
-    case 137:
-      return 'Polygon'
-    case 42161:
-      return 'Arbitrum'
-    case 10:
-      return 'Optimism'
-    case 8453:
-      return 'Base'
-    case 11155111:
-      return 'Sepolia'
+    case 1315:
+      return 'Story Aeneid Testnet'
     default:
-      return 'Unknown Network'
+      return `Unsupported Network (Chain ID: ${chainId || 'Unknown'})`
   }
 }

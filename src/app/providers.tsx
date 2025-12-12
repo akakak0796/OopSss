@@ -3,28 +3,21 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiProvider } from 'wagmi'
 import { RainbowKitProvider, getDefaultConfig } from '@rainbow-me/rainbowkit'
-import { mainnet, polygon, arbitrum, optimism, base, sepolia } from 'wagmi/chains'
 import { http } from 'viem'
 import { NETWORK_CONFIG } from '@/config/network'
 
-// Use U2U Mainnet from network config
-const u2uMainnet = NETWORK_CONFIG.U2U_MAINNET
+// Use Story Aeneid testnet from network config
+const storyAeneid = NETWORK_CONFIG.STORY_AENEID
 
 const config = getDefaultConfig({
   appName: 'OopSss',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'demo-project-id',
-  chains: [u2uMainnet, mainnet, polygon, arbitrum, optimism, base, sepolia],
+  chains: [storyAeneid],
   transports: {
-    [u2uMainnet.id]: http('https://rpc-mainnet.u2u.xyz', {
+    [storyAeneid.id]: http('https://aeneid.storyrpc.io', {
       retryCount: 3,
       retryDelay: 1000,
     }),
-    [mainnet.id]: http(),
-    [polygon.id]: http(),
-    [arbitrum.id]: http(),
-    [optimism.id]: http(),
-    [base.id]: http(),
-    [sepolia.id]: http(),
   },
   ssr: false, // Disable SSR for wallet components
 })
@@ -36,8 +29,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
-          initialChain={u2uMainnet}
-          showRecentTransactions={false}
+          initialChain={storyAeneid}
+          showRecentTransactions={true}
         >
           {children}
         </RainbowKitProvider>

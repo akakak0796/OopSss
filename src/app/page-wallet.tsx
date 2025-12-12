@@ -25,11 +25,11 @@ export default function Home() {
   const { address, isConnected } = useAccount()
   const [showGame, setShowGame] = useState(false)
   const [isClient, setIsClient] = useState(false)
-  const { 
-    balance, 
-    playerStats, 
-    claimDailyReward, 
-    isClaimingDaily 
+  const {
+    balance,
+    playerStats,
+    claimDailyReward,
+    isClaimingDaily
   } = useOopSssToken()
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <div className="flex items-center space-x-4">
           {isClient && isConnected && (
-            <Link 
+            <Link
               href="/leaderboard"
               className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-white hover:bg-white/20 transition-colors"
             >
@@ -71,10 +71,10 @@ export default function Home() {
             OopSss
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            The first SocialFi-GameFi snake game on U2U Mainnet. Play to earn $ST tokens, 
+            The first SocialFi-GameFi snake game on Story Aeneid Testnet. Play to earn $ST tokens,
             compete with friends, and climb the leaderboards in this addictive multiplayer experience.
           </p>
-          
+
           {isClient && (isConnected || true) ? (
             <div className="space-y-4">
               {/* Player Stats */}
@@ -98,7 +98,7 @@ export default function Home() {
                     <p className="text-sm text-gray-300">Day Streak</p>
                   </div>
                 </div>
-                
+
                 {/* Daily Reward */}
                 {playerStats.canClaimDaily && (
                   <div className="mb-4">
@@ -111,7 +111,7 @@ export default function Home() {
                     </button>
                   </div>
                 )}
-                
+
                 <div className="border-t border-white/20 pt-4">
                   <p className="text-gray-300 mb-4 text-center">
                     Entry Fee: 5 $ST | Earn: 1 $ST per 10 seconds survived
@@ -146,7 +146,7 @@ export default function Home() {
               Earn $ST tokens based on survival time. The longer you survive, the more you earn!
             </p>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
             <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">Leaderboards</h3>
@@ -154,7 +154,7 @@ export default function Home() {
               Compete with players worldwide and climb the daily/weekly leaderboards.
             </p>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
             <Users className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">SocialFi</h3>
@@ -179,7 +179,7 @@ export default function Home() {
               <li>• Survive as long as possible to earn rewards</li>
             </ul>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
             <h3 className="text-2xl font-semibold text-white mb-4 flex items-center">
               <Zap className="w-6 h-6 mr-2" />

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "OopSss - SocialFi GameFi Snake Game",
-  description: "Play-to-earn snake game with blockchain rewards on U2U Solaris Mainnet",
+  description: "Play-to-earn snake game with blockchain rewards on Story Aeneid Testnet",
 };
 
 export default function RootLayout({

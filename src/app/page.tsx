@@ -24,11 +24,12 @@ const Game = dynamic(() => import('@/components/Game'), {
 export default function Home() {
   const { address, isConnected } = useAccount()
   const [showGame, setShowGame] = useState(false)
-  const { 
-    balance, 
-    playerStats, 
-    claimDailyReward, 
-    isClaimingDaily 
+  const {
+    balance,
+    playerStats,
+    claimDailyReward,
+    isClaimingDaily,
+    timeUntilNextClaim
   } = useOopSssToken()
 
   if (showGame) {
@@ -47,7 +48,7 @@ export default function Home() {
         </div>
         <div className="flex items-center space-x-4">
           {isConnected && (
-            <Link 
+            <Link
               href="/leaderboard"
               className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-white hover:bg-white/20 transition-colors"
             >
@@ -65,11 +66,11 @@ export default function Home() {
           <h1 className="text-6xl font-bold text-white mb-6">
             OopSss
           </h1>
-           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-             The first SocialFi-GameFi snake game on U2U Solaris Mainnet. Play to earn $ST tokens, 
-             compete with friends, and climb the leaderboards in this addictive multiplayer experience.
-           </p>
-          
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            The first SocialFi-GameFi snake game on Story Aeneid Testnet. Play to earn $ST tokens,
+            compete with friends, and climb the leaderboards in this addictive multiplayer experience.
+          </p>
+
           {isConnected ? (
             <div className="space-y-4">
               {/* Player Stats */}
@@ -93,20 +94,33 @@ export default function Home() {
                     <p className="text-sm text-gray-300">Day Streak</p>
                   </div>
                 </div>
-                
+
                 {/* Daily Reward */}
-                {playerStats.canClaimDaily && (
-                  <div className="mb-4">
+                <div className="mb-4">
+                  {playerStats.canClaimDaily ? (
                     <button
                       onClick={() => claimDailyReward()}
                       disabled={isClaimingDaily}
-                      className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-bold py-2 px-4 rounded-lg hover:from-green-500 hover:to-green-700 transition-all duration-200 disabled:opacity-50"
+                      className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-bold py-3 px-4 rounded-lg hover:from-green-500 hover:to-green-700 transition-all duration-200 disabled:opacity-50 flex items-center justify-center space-x-2"
                     >
-                      {isClaimingDaily ? 'Claiming...' : '🎁 Claim Daily Reward (2 $ST)'}
+                      <span>{isClaimingDaily ? 'Claiming...' : '🎁 Claim Daily Reward (2 $ST + Streak Bonus)'}</span>
                     </button>
-                  </div>
-                )}
-                
+                  ) : (
+                    <div className="bg-white/5 rounded-lg p-3 text-center">
+                      <p className="text-gray-400 text-sm mb-1">Next Daily Claim Available In:</p>
+                      <p className="text-white font-bold text-lg">
+                        {timeUntilNextClaim > 0 ? (
+                          <>
+                            {Math.floor(timeUntilNextClaim / 3600)}h {Math.floor((timeUntilNextClaim % 3600) / 60)}m {timeUntilNextClaim % 60}s
+                          </>
+                        ) : (
+                          'Available Now!'
+                        )}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
                 <div className="border-t border-white/20 pt-4">
                   <p className="text-gray-300 mb-4 text-center">
                     Entry Fee: 5 $ST | Earn: 1 $ST per 10 seconds survived
@@ -141,7 +155,7 @@ export default function Home() {
               Earn $ST tokens based on survival time. The longer you survive, the more you earn!
             </p>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
             <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">Leaderboards</h3>
@@ -149,7 +163,7 @@ export default function Home() {
               Compete with players worldwide and climb the daily/weekly leaderboards.
             </p>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
             <Users className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">SocialFi</h3>
@@ -174,7 +188,7 @@ export default function Home() {
               <li>• Survive as long as possible to earn rewards</li>
             </ul>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
             <h3 className="text-2xl font-semibold text-white mb-4 flex items-center">
               <Zap className="w-6 h-6 mr-2" />
@@ -201,13 +215,13 @@ function GameInterface() {
   const [gameEnded, setGameEnded] = useState(false)
   const [finalScore, setFinalScore] = useState(0)
   const [currentGameId, setCurrentGameId] = useState<number | null>(null)
-  
-  const { 
-    balance, 
-    playerStats, 
-    startGame, 
-    endGame, 
-    isStartingGame, 
+
+  const {
+    balance,
+    playerStats,
+    startGame,
+    endGame,
+    isStartingGame,
     isEndingGame,
     refetchBalance,
     refetchStats
@@ -216,7 +230,7 @@ function GameInterface() {
   const handleGameEnd = async (time: number, score: number) => {
     setGameEnded(true)
     setFinalScore(score)
-    
+
     // End game on blockchain
     if (currentGameId !== null) {
       try {
@@ -329,15 +343,15 @@ function GameInterface() {
         </div>
       </div>
 
-       {/* Game Canvas */}
-       <Game 
-         onGameEnd={handleGameEnd}
-         onSurvivalTimeUpdate={handleSurvivalTimeUpdate}
-         onStopGame={() => {
-           // Optional: Add any additional stop game logic here
-           console.log('Game stopped by user')
-         }}
-       />
+      {/* Game Canvas */}
+      <Game
+        onGameEnd={handleGameEnd}
+        onSurvivalTimeUpdate={handleSurvivalTimeUpdate}
+        onStopGame={() => {
+          // Optional: Add any additional stop game logic here
+          console.log('Game stopped by user')
+        }}
+      />
     </div>
   )
 }

@@ -49,18 +49,49 @@ export function useOopSssToken() {
     functionName: 'decimals',
   })
 
+  const { data: playerStatsData, refetch: refetchStats } = useReadContract({
+    address: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS as `0x${string}`,
+    abi: SnakeTokenABI.abi,
+    functionName: 'getPlayerStats',
+    args: address ? [address] : undefined,
+    query: {
+      enabled: !!address,
+    },
+  })
+
+  const { data: canClaimDaily, refetch: refetchCanClaim } = useReadContract({
+    address: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS as `0x${string}`,
+    abi: SnakeTokenABI.abi,
+    functionName: 'canClaimDailyReward',
+    args: address ? [address] : undefined,
+    query: {
+      enabled: !!address,
+    },
+  })
+
+  const { data: lastLoginTime } = useReadContract({
+    address: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS as `0x${string}`,
+    abi: SnakeTokenABI.abi,
+    functionName: 'lastLoginTime',
+    args: address ? [address] : undefined,
+    query: {
+      enabled: !!address,
+    },
+  })
+
   // Local state
   const [playerStats, setPlayerStats] = useState<PlayerStats>({
     balance: '0',
     totalEarned: '0',
     gamesPlayed: 0,
     currentStreak: 0,
-    canClaimDaily: true
+    canClaimDaily: false
   })
 
   const [dailyLeaderboard, setDailyLeaderboard] = useState<LeaderboardEntry[]>([])
   const [weeklyLeaderboard, setWeeklyLeaderboard] = useState<LeaderboardEntry[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [timeUntilNextClaim, setTimeUntilNextClaim] = useState<number>(0)
 
   // Update balance when contract data changes
   useEffect(() => {
@@ -73,23 +104,49 @@ export function useOopSssToken() {
     }
   }, [balance, decimals])
 
-  // Check daily claim eligibility
+  // Update player stats from contract
   useEffect(() => {
-    if (isConnected && address) {
-      const lastClaimKey = `daily_claim_${address}`
-      const lastClaim = localStorage.getItem(lastClaimKey)
-      const today = new Date().toDateString()
-      
-      setPlayerStats(prev => ({
-        ...prev,
-        canClaimDaily: lastClaim !== today
-      }))
+    if (playerStatsData && Array.isArray(playerStatsData) && decimals) {
+      const [balanceRaw, totalEarnedRaw, gamesPlayedRaw, currentStreakRaw, canClaimToday] = playerStatsData
+
+      setPlayerStats({
+        balance: (Number(balanceRaw) / Math.pow(10, Number(decimals))).toFixed(2),
+        totalEarned: (Number(totalEarnedRaw) / Math.pow(10, Number(decimals))).toFixed(2),
+        gamesPlayed: Number(gamesPlayedRaw),
+        currentStreak: Number(currentStreakRaw),
+        canClaimDaily: Boolean(canClaimToday)
+      })
     }
-  }, [isConnected, address])
+  }, [playerStatsData, decimals])
+
+  // Calculate time until next claim
+  useEffect(() => {
+    if (lastLoginTime && !canClaimDaily) {
+      const updateTimer = () => {
+        const lastLogin = Number(lastLoginTime)
+        if (lastLogin === 0) {
+          setTimeUntilNextClaim(0)
+          return
+        }
+
+        const nextClaimTime = lastLogin + (24 * 60 * 60) // 24 hours in seconds
+        const now = Math.floor(Date.now() / 1000)
+        const timeLeft = nextClaimTime - now
+
+        setTimeUntilNextClaim(timeLeft > 0 ? timeLeft : 0)
+      }
+
+      updateTimer()
+      const interval = setInterval(updateTimer, 1000)
+      return () => clearInterval(interval)
+    } else {
+      setTimeUntilNextClaim(0)
+    }
+  }, [lastLoginTime, canClaimDaily])
 
   const payEntryFee = async () => {
     if (!address) throw new Error('Wallet not connected')
-    
+
     try {
       await writeContract({
         address: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS as `0x${string}`,
@@ -125,34 +182,25 @@ export function useOopSssToken() {
   const endGame = async (args: { args: [bigint, bigint] }) => {
     setIsLoading(true)
     try {
-      const [gameId, score] = args.args
-      const reward = Number(score) * CONTRACT_CONFIG.REWARD_PER_FOOD
-      
-      // Mint tokens to player
+      const [gameId, survivalTime] = args.args
+      const reward = Number(survivalTime) * CONTRACT_CONFIG.REWARD_PER_SECOND
+
+      // Award survival reward through contract
       await writeContract({
         address: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS as `0x${string}`,
         abi: SnakeTokenABI.abi,
-        functionName: 'mint',
-        args: [
-          address!,
-          BigInt(reward * Math.pow(10, Number(decimals) || 18))
-        ],
+        functionName: 'awardSurvivalReward',
+        args: [address!, survivalTime],
       })
-
-      // Update local stats
-      setPlayerStats(prev => ({
-        ...prev,
-        totalEarned: (parseFloat(prev.totalEarned) + reward).toString(),
-        gamesPlayed: prev.gamesPlayed + 1
-      }))
 
       // Wait for transaction confirmation
       if (hash) {
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        await new Promise(resolve => setTimeout(resolve, 3000))
       }
-      
-      // Refresh balance
+
+      // Refresh data
       refetchBalance()
+      refetchStats()
       setIsLoading(false)
     } catch (error) {
       console.error('Failed to end game:', error)
@@ -163,39 +211,28 @@ export function useOopSssToken() {
 
   const claimDailyReward = async () => {
     if (!address) throw new Error('Wallet not connected')
-    
+
     setIsLoading(true)
     try {
-      // Mint daily reward tokens
+      // Call contract's claimDailyReward function
       await writeContract({
         address: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS as `0x${string}`,
         abi: SnakeTokenABI.abi,
-        functionName: 'mint',
-        args: [
-          address,
-          BigInt(CONTRACT_CONFIG.DAILY_REWARD * Math.pow(10, Number(decimals) || 18))
-        ],
+        functionName: 'claimDailyReward',
       })
-
-      // Update local state
-      const lastClaimKey = `daily_claim_${address}`
-      localStorage.setItem(lastClaimKey, new Date().toDateString())
-      
-      setPlayerStats(prev => ({
-        ...prev,
-        canClaimDaily: false,
-        currentStreak: prev.currentStreak + 1,
-        totalEarned: (parseFloat(prev.totalEarned) + CONTRACT_CONFIG.DAILY_REWARD).toString()
-      }))
 
       // Wait for transaction confirmation
       if (hash) {
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        await new Promise(resolve => setTimeout(resolve, 3000))
       }
-      
-      // Refresh balance
+
+      // Refresh all data
       refetchBalance()
+      refetchStats()
+      refetchCanClaim()
+
       setIsLoading(false)
+      return true
     } catch (error) {
       console.error('Failed to claim daily reward:', error)
       setIsLoading(false)
@@ -204,10 +241,6 @@ export function useOopSssToken() {
   }
 
   // Mock refetch functions (for compatibility)
-  const refetchStats = () => {
-    console.log('Refetching stats...')
-  }
-
   const refetchDailyLeaderboard = () => {
     console.log('Refetching daily leaderboard...')
   }
@@ -238,13 +271,14 @@ export function useOopSssToken() {
     playerStats,
     dailyLeaderboard,
     weeklyLeaderboard,
-    
+    timeUntilNextClaim,
+
     // Actions
     startGame,
     endGame,
     claimDailyReward,
     payEntryFee,
-    
+
     // Loading states
     isStartingGame: isLoading,
     isEndingGame: isLoading,
@@ -253,18 +287,18 @@ export function useOopSssToken() {
     isWriting,
     isConfirming,
     isConfirmed,
-    
+
     // Refetch functions
     refetchBalance,
     refetchStats,
     refetchDailyLeaderboard,
     refetchWeeklyLeaderboard,
-    
+
     // Contract info
     contractAddress: CONTRACT_CONFIG.SNAKE_TOKEN_ADDRESS,
     tokenSymbol: symbol || 'ST',
     entryFee: CONTRACT_CONFIG.ENTRY_FEE,
     dailyReward: CONTRACT_CONFIG.DAILY_REWARD,
-    rewardPerFood: CONTRACT_CONFIG.REWARD_PER_FOOD,
+    rewardPerSecond: CONTRACT_CONFIG.REWARD_PER_SECOND,
   }
 }

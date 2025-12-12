@@ -6,14 +6,14 @@ A browser-based, OopSss.io-inspired multiplayer snake game integrated with block
 
 ### **🌐 Live Application**
 - **Play Now**: [https://oopsss.vercel.app](https://oopsss.vercel.app)
-- **Network**: U2U Solaris Mainnet (Chain ID: 39)
+- **Network**: Story Aeneid Testnet (Chain ID: 1315)
 - **Status**: ✅ Live and Playable
 
 ### **📄 Smart Contract**
-- **Contract Address**: `0x5B60CF7edCCc82350C223eF591a4C951d64e74EF`
+- **Contract Address**: `0x39Ab8225c635e888Ef2819791Cb38972ad0BB20F`
 - **Token Symbol**: $ST (OopSss Token)
-- **Network**: U2U Solaris Mainnet
-- **Explorer**: [View on U2U Explorer](https://u2uscan.xyz/address/0x5B60CF7edCCc82350C223eF591a4C951d64e74EF)
+- **Network**: Story Aeneid Testnet
+- **Explorer**: [View on Story Explorer](https://aeneid.storyscan.xyz/address/0x39Ab8225c635e888Ef2819791Cb38972ad0BB20F)
 - **ABI**: Available in `src/contracts/SnakeToken.json`
 
 ## 🎮 Features
@@ -105,7 +105,7 @@ A browser-based, OopSss.io-inspired multiplayer snake game integrated with block
 - **State Management**: React hooks
 
 ### Blockchain
-- **Network**: U2U Solaris Mainnet
+- **Network**: Story Aeneid Testnet
 - **Token Standard**: ERC-20
 - **Smart Contracts**: 
   - `OopSssToken.sol`: Token management and rewards
